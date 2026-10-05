@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body><title>UKExperience Singing Stars</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body><title>UKExperience</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700&display=swap">
 <style>
 /* Layout: one phone-sized scene. Logo + mode switch on top, mascot on the shore, headline and CTA on the sand. Single night-beach look by design. */
@@ -76,9 +76,113 @@ h1{font:600 clamp(28px,8.6vw,36px)/1.05 var(--display);margin:0;text-wrap:balanc
 .cta:disabled{opacity:.6;cursor:default}
 .note{margin:12px 0 0;font:700 14px/1.35 var(--body);color:var(--navy);text-align:center}
 .copy .badge{margin:0 0 12px;padding:6px 10px;border:2px dashed var(--gold);border-radius:12px;font:700 14px/1.3 var(--body);color:var(--gold);text-align:center}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mapmode .stage,.mapmode .sand{display:none}
+.nostar .star{display:none}
+.copy .hint{min-height:1.4em;margin-top:6px;color:var(--gold)}
+.copy input{width:100%;max-width:300px;min-height:52px;margin-top:14px;padding:0 16px;font:600 20px var(--display);text-align:center;color:var(--navy);background:var(--cream);border:3px solid var(--gold);border-radius:26px}
+.copy .err{color:var(--gold);margin-top:8px}
+.copy .tag{display:inline-block;margin:0 0 10px;padding:4px 12px;border:2px dashed var(--gold);border-radius:12px;font:700 13px/1.3 var(--body);color:var(--gold)}
+.tips{margin:12px auto 0;padding:0 0 0 22px;max-width:340px;text-align:left;font-weight:600;font-size:16px;line-height:1.4;color:rgba(255,243,220,.92)}
+.tips li{margin-top:8px}
+.islandmap{position:relative;flex:1;padding:14px 20px calc(28px + env(safe-area-inset-bottom,0px));z-index:1}
+.islandmap::before{content:"";position:absolute;left:10px;right:10px;top:4px;bottom:10px;border-radius:44% 56% 48% 52%/22% 24% 30% 28%;background:radial-gradient(ellipse at 50% 35%,var(--cream),var(--sand) 60%,#E7C98C);box-shadow:0 0 0 10px rgba(31,200,195,.35),0 0 0 22px rgba(31,200,195,.14)}
+.isl-palm{position:absolute;right:6px;top:-26px;width:84px;z-index:0;pointer-events:none}
+.stops{position:relative;z-index:1;display:flex;flex-direction:column;gap:12px;padding:22px 12px 14px}
+.stops::before{content:"";position:absolute;left:46px;top:46px;bottom:46px;border-left:3px dotted var(--navy);opacity:.35}
+.stop{position:relative;z-index:1;display:flex;align-items:center;gap:12px;width:100%;min-height:68px;padding:8px 14px 8px 10px;text-align:left;color:var(--cream);background:var(--navy);border:3px solid var(--turq);border-radius:34px 18px 18px 34px;font-family:var(--body);cursor:pointer}
+.stop.open{border-color:var(--coral)}
+.stop.locked,.stop.soon{border-style:dashed;border-color:rgba(255,243,220,.55);opacity:.8;cursor:default}
+.stop .txt{display:flex;flex-direction:column;min-width:0}
+.stop b{font:600 18px/1.15 var(--display)}
+.stop small{margin-top:2px;font:700 13px/1.3 var(--body);color:rgba(255,243,220,.88)}
+.bd{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;font:600 20px var(--display);color:var(--navy);background:var(--turq)}
+.open .bd{background:var(--coral);animation:pulse calc(2s*var(--speed)) ease-in-out infinite}
+.locked .bd,.soon .bd{color:var(--cream);background:none;border:2px solid rgba(255,243,220,.6)}
+.ic{width:20px;height:20px;fill:currentColor}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(255,111,97,.3)}}
+.emode .copy,.emode .stage,.emode .sand{display:none}
+.entr{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;padding:6px 20px 0}
+.entr h1{margin:0;font:600 clamp(26px,8vw,34px)/1.1 var(--display);text-align:center;text-wrap:balance}
+.entr .sub{margin:8px 0 0;text-align:center;font-weight:600;color:rgba(255,243,220,.9)}
+.entr .hint{min-height:1.4em;margin:8px 0 0;text-align:center;font-weight:700;color:var(--gold)}
+.efoot{position:sticky;bottom:0;z-index:5;display:flex;gap:10px;margin:auto -20px 0;padding:16px 20px calc(18px + env(safe-area-inset-bottom,0px));background:linear-gradient(180deg,rgba(11,31,58,0),var(--navy) 38%)}
+.efoot .cta{flex:1;width:auto;font-size:21px}
+.efoot .ghost{flex:none;width:88px;min-height:60px;color:var(--cream);border-color:var(--cream)}
+.scene{position:relative;height:300px;margin:4px -20px 0;overflow:hidden}
+.w-sea{position:absolute;left:0;right:0;bottom:0;height:46%;background:linear-gradient(180deg,var(--lagoon),#0F5A7C)}
+.w-sand{position:absolute;left:0;right:0;bottom:0;height:20%;background:linear-gradient(180deg,var(--sand),var(--cream))}
+.w-palm{position:absolute;bottom:12%;width:90px;transform-origin:50% 100%;animation:sway calc(5s*var(--speed)) ease-in-out infinite}
+.notes i{position:absolute;bottom:18%;font:700 26px var(--display);font-style:normal;opacity:0;animation:float 7s linear infinite}
+@keyframes float{0%{transform:translate(0,0) rotate(-8deg);opacity:0}15%{opacity:.9}100%{transform:translate(18px,-240px) rotate(10deg);opacity:0}}
+.chr{position:absolute;bottom:5%;width:80px;height:96px;padding:0;border:0;background:none;cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent}
+.chr svg{width:100%;height:100%;overflow:visible;transform-origin:50% 100%;animation:sway calc(4s*var(--speed)) ease-in-out infinite}
+.chr.tap svg{animation:squash .5s ease-out}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes squash{30%{transform:scale(1.14,.84)}65%{transform:scale(.94,1.1) translateY(-12px)}}
+@keyframes breathe{50%{transform:scale(1.04,.97)}}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes hit{50%{transform:rotate(14deg)}}
+@keyframes rise{from{transform:translateY(10px)}to{transform:translateY(-34px);opacity:0}}
+@keyframes keyf{50%{opacity:.85}}
+.br{transform-box:fill-box;transform-origin:50% 100%;animation:breathe calc(3s*var(--speed)) ease-in-out infinite}
+.eyes{transform-box:fill-box;transform-origin:50% 50%;animation:blink 4.6s infinite}
+.stick{transform-box:fill-box;transform-origin:50% 100%;animation:hit calc(1.3s*var(--speed)) ease-in-out infinite}
+.stick.r{animation-delay:.65s;animation-direction:reverse}
+.wavearm{transform-box:fill-box;transform-origin:100% 100%;animation:hit calc(1.4s*var(--speed)) ease-in-out infinite}
+.key{opacity:0}
+.chr.tap .key{animation:keyf .5s ease-out}
+.chr.tap .key:nth-child(2){animation-delay:.1s}.chr.tap .key:nth-child(3){animation-delay:.2s}.chr.tap .key:nth-child(4){animation-delay:.3s}
+.puff{position:absolute;left:50%;top:-6px;margin-left:-10px;font:700 24px var(--display);color:var(--gold);opacity:0;pointer-events:none}
+.chr.tap .puff{opacity:1;animation:rise .9s ease-out forwards}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:92px;min-width:0;padding:8px;color:var(--cream);background:var(--navy);border:3px solid rgba(255,243,220,.55);border-radius:22px;font:600 17px var(--display);text-align:center;cursor:pointer}
+.tile small{font:700 12px var(--body);color:rgba(255,243,220,.88)}
+.tile .ico{width:34px;height:34px;fill:currentColor}
+.tile.play{border-color:var(--turq)}
+.tile.play .ico{animation:sway calc(3s*var(--speed)) ease-in-out infinite}
+.tile[aria-checked=true]{border-color:var(--coral);background:#0E2A4C}
+.tile[aria-disabled=true]{border-style:dashed;opacity:.85;cursor:default}
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;min-height:64px;padding:8px 14px 8px 10px;text-align:left;color:var(--cream);background:var(--navy);border:3px solid rgba(255,243,220,.55);border-radius:32px 18px 18px 32px;font-family:var(--body);cursor:pointer}
+.opt[aria-checked=true]{border-color:var(--turq);background:#0E2A4C}
+.opt[aria-disabled=true]{border-style:dashed;opacity:.85;cursor:default}
+.opt .txt{display:flex;flex-direction:column;min-width:0}
+.opt b{font:600 19px/1.15 var(--display)}
+.opt small{margin-top:2px;font:700 13px/1.3 var(--body);color:rgba(255,243,220,.88)}
+.opt .bd{background:none;border:2px solid rgba(255,243,220,.6);color:var(--cream)}
+.opt[aria-checked=true] .bd{background:var(--turq);border-color:var(--turq);color:var(--navy)}
+.seg{display:flex;justify-content:center;margin-top:14px}
+.replay{position:relative;z-index:1;display:block;margin:8px auto 0;min-height:48px;padding:0 20px;font:700 15px var(--body);color:var(--navy);background:transparent;border:2px solid var(--navy);border-radius:24px;cursor:pointer}
+.story{height:340px}
+.entr[data-e=e1] .scene{flex:1;height:auto;min-height:300px;margin-top:12px}
+.isl{fill:#12476B;stroke:#2B7DA3;stroke-width:2}
+.glow{fill:var(--turq);opacity:0;animation:lit calc(9s*var(--speed)) ease-in-out infinite}
+.glow.g2{animation-delay:calc(3s*var(--speed))}.glow.g3{animation-delay:calc(6s*var(--speed))}
+@keyframes lit{0%,100%{opacity:0}18%,40%{opacity:.8}}
+.mclone{position:absolute;left:50%;bottom:4%;width:140px;margin-left:-70px;z-index:2}
+.mclone .uku{width:100%;margin:0}
+.caps{position:relative;height:96px;margin-top:10px}
+.cap{position:absolute;inset:0;margin:0;text-align:center;font:600 20px/1.3 var(--display);opacity:0;transition:opacity .5s}
+.cap.on{opacity:1}
+.caps.rm{height:auto}
+.caps.rm .cap{position:static;opacity:1;margin-top:8px;font-size:17px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="lock" viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V8a3 3 0 0 0-6 0z"/></symbol></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-uke" viewBox="0 0 32 32"><circle cx="16" cy="23" r="7"/><circle cx="16" cy="13.5" r="5"/><rect x="14.8" y="1" width="2.4" height="10"/><circle cx="16" cy="24" r="2.2" style="fill:var(--navy)"/></symbol>
+<symbol id="i-guitar" viewBox="0 0 32 32"><circle cx="16" cy="24" r="7.5"/><circle cx="16" cy="15" r="5.5"/><rect x="14.8" y="1" width="2.4" height="12"/><circle cx="16" cy="22" r="2.4" style="fill:var(--navy)"/></symbol>
+<symbol id="i-violin" viewBox="0 0 32 32"><ellipse cx="16" cy="22" rx="6.5" ry="6"/><ellipse cx="16" cy="13" rx="4.8" ry="4.5"/><rect x="15" y="1" width="2" height="8"/><path d="M26 4L7 29" stroke="currentColor" stroke-width="1.6" fill="none"/></symbol>
+<symbol id="i-cello" viewBox="0 0 32 32"><ellipse cx="14" cy="21" rx="8" ry="7"/><ellipse cx="14" cy="11.5" rx="5.5" ry="5"/><rect x="13" y="1" width="2" height="7"/><rect x="13.4" y="27" width="1.2" height="4"/><path d="M27 6L10 28" stroke="currentColor" stroke-width="1.6" fill="none"/></symbol>
+<symbol id="i-keys" viewBox="0 0 32 32"><rect x="2" y="8" width="28" height="17" rx="2.5"/><path d="M8 25V15M14 25V15M20 25V15M26 25V15" stroke="var(--navy)" stroke-width="1.2"/><g style="fill:var(--navy)"><rect x="6.5" y="8" width="3" height="9"/><rect x="12.5" y="8" width="3" height="9"/><rect x="22.5" y="8" width="3" height="9"/></g></symbol>
+<symbol id="i-drum" viewBox="0 0 32 32"><ellipse cx="16" cy="13" rx="11" ry="4"/><path d="M5 13v9c0 2.5 5 4.5 11 4.5s11-2 11-4.5v-9c0 2.5-5 4.5-11 4.5S5 15.500 5 13z"/><path d="M9 3l7 8M23 3l-7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-sax" viewBox="0 0 32 32"><path d="M20 3l-3 3v14a5 5 0 1 0 10 0v-3" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="25" cy="14" rx="4" ry="2.6"/></symbol>
+<symbol id="i-flute" viewBox="0 0 32 32"><g transform="rotate(-20 16 16)"><rect x="1" y="13" width="30" height="6" rx="3"/><g style="fill:var(--navy)"><circle cx="9" cy="16" r="1.2"/><circle cx="14" cy="16" r="1.2"/><circle cx="19" cy="16" r="1.2"/><circle cx="24" cy="16" r="1.2"/></g></g></symbol>
+<symbol id="i-harm" viewBox="0 0 32 32"><rect x="2" y="10" width="28" height="12" rx="2"/><path d="M7 14v4M12 14v4M17 14v4M22 14v4M27 14v4" stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round"/></symbol>
+<symbol id="i-more" viewBox="0 0 32 32"><path d="M16 2l3.200 10.800L30 16l-10.800 3.200L16 30l-3.200-10.800L2 16l10.800-3.200z"/></symbol>
+</svg>
 <main class="app" id="app">
   <div class="stars" id="stars" aria-hidden="true"></div>
 
@@ -93,13 +197,19 @@ h1{font:600 clamp(28px,8.6vw,36px)/1.05 var(--display);margin:0;text-wrap:balanc
       </svg>KExperience
     </h2>
     <div class="mode" role="group" aria-label="Theme">
-      <button type="button" id="m-play" aria-pressed="true">Playful</button>
-      <button type="button" id="m-calm" aria-pressed="false">Calm</button>
+      <button type="button" id="m-play" data-mode="play" aria-pressed="true">Playful</button>
+      <button type="button" id="m-calm" data-mode="calm" aria-pressed="false">Calm</button>
     </div>
   </header>
 
   <section class="copy">
-    <div data-v="home"><h1>Wake your first star</h1><p>Pluck a string and listen. Three clear notes light it up.</p></div>
+    <div data-v="map"><h1>Island One</h1><p id="mapsub"></p><p class="hint" id="maphint" role="status"></p></div>
+    <div data-v="meet" hidden><h1>Meet your companion</h1><p>Give your ukulele friend a nickname. You can change it any time.</p>
+      <label class="vh" for="nick">Companion nickname</label><input id="nick" maxlength="16" autocomplete="off" placeholder="Uku"><p class="err" id="nickerr" hidden>Type a nickname first.</p></div>
+    <div data-v="hold" hidden><span class="tag">Awaiting teacher review</span><h1>Get comfortable</h1>
+      <ul class="tips"><li>Sit tall and let your shoulders relax.</li><li>Rest the ukulele against your chest, held gently by your forearm.</li><li>Let your other hand support the neck lightly. No tight squeeze.</li><li>Pluck near the end of the neck with a thumb or fingertip.</li></ul>
+      <p>Relaxed is the goal. You’ve got this.</p></div>
+    <div data-v="home" hidden><h1>Wake your first star</h1><p>Pluck a string and listen. Three clear notes light it up.</p></div>
     <div data-v="guide" hidden><h1>Pluck the open A string</h1><p>On a G–C–E–A ukulele, A is the string closest to the floor. Pluck it once, then let it ring.</p></div>
     <div data-v="listen" hidden>
       <p class="badge" id="badge" hidden>Demo mode: simulated plucks, no microphone</p>
@@ -109,9 +219,64 @@ h1{font:600 clamp(28px,8.6vw,36px)/1.05 var(--display);margin:0;text-wrap:balanc
       <p id="sub">Listening. 0 of 3 clear plucks.</p>
     </div>
     <div data-v="denied" hidden><h1>Microphone is off</h1><p id="dmsg"></p></div>
-    <div data-v="won" hidden><h1>You woke the star!</h1><p>Three clear plucks on the A string.</p></div>
+    <div data-v="won" hidden><h1 id="wt">You woke the star!</h1><p id="wp">Three clear plucks on the A string.</p></div>
   </section>
 
+<section class="entr" data-e="e1" hidden>
+    <h1>Welcome to the world of music!</h1>
+    <p class="sub">Tap an instrument to say hello.</p>
+    <div class="scene" id="scene1">
+      <div class="w-sea"></div><div class="w-sand"></div>
+      <svg class="w-palm" style="left:-8px;bottom:14%" viewBox="0 0 120 150" aria-hidden="true"><path d="M40 150C48 110 52 80 62 40" stroke="#07142A" stroke-width="7" fill="none" stroke-linecap="round"/><g fill="#07142A"><path d="M62 40C40 22 18 28 4 44 28 36 46 38 62 40Z"/><path d="M62 40C46 14 24 10 10 14 34 18 50 28 62 40Z"/><path d="M62 40C70 14 92 6 112 14 90 16 74 28 62 40Z"/><path d="M62 40C84 26 104 32 118 50 94 40 78 40 62 40Z"/></g></svg><svg class="w-palm" style="right:-10px;bottom:15%;width:100px;animation-delay:-2s" viewBox="0 0 120 150" aria-hidden="true"><path d="M40 150C48 110 52 80 62 40" stroke="#07142A" stroke-width="7" fill="none" stroke-linecap="round"/><g fill="#07142A"><path d="M62 40C40 22 18 28 4 44 28 36 46 38 62 40Z"/><path d="M62 40C46 14 24 10 10 14 34 18 50 28 62 40Z"/><path d="M62 40C70 14 92 6 112 14 90 16 74 28 62 40Z"/><path d="M62 40C84 26 104 32 118 50 94 40 78 40 62 40Z"/></g></svg>
+      <div class="notes" aria-hidden="true"><i style="left:8%;color:#FFD27A;animation-delay:0.0s;animation-duration:7s">♪</i><i style="left:22%;color:#1FC8C3;animation-delay:1.6s;animation-duration:8s">♫</i><i style="left:38%;color:#FF6F61;animation-delay:3.1s;animation-duration:7s">♪</i><i style="left:52%;color:#FFD27A;animation-delay:0.8s;animation-duration:9s">♫</i><i style="left:66%;color:#1FC8C3;animation-delay:2.4s;animation-duration:7s">♪</i><i style="left:80%;color:#FF6F61;animation-delay:4.2s;animation-duration:8s">♫</i><i style="left:92%;color:#FFD27A;animation-delay:5.4s;animation-duration:9s">♪</i><i style="left:30%;color:#FFF3DC;animation-delay:6.0s;animation-duration:8s">♪</i></div>
+      <button type="button" class="chr" style="left:1%" aria-label="Drum, tap to play"><svg viewBox="0 0 100 110" style="animation-delay:-.5s"><g class="br"><rect x="16" y="46" width="68" height="52" rx="8" fill="#FF6F61"/><rect x="16" y="52" width="68" height="6" fill="#FFF3DC" opacity=".8"/><rect x="16" y="88" width="68" height="6" fill="#FFF3DC" opacity=".8"/><ellipse cx="50" cy="46" rx="34" ry="9" fill="#FFF3DC"/><g class="eyes"><circle cx="38" cy="70" r="7" fill="#fff"/><circle cx="62" cy="70" r="7" fill="#fff"/><circle cx="39" cy="71" r="3.4" fill="#0B1F3A"/><circle cx="63" cy="71" r="3.4" fill="#0B1F3A"/></g><path d="M42 83q8 6 16 0" stroke="#0B1F3A" stroke-width="3" fill="none" stroke-linecap="round"/><g class="stick"><line x1="30" y1="42" x2="16" y2="12" stroke="#FFD27A" stroke-width="4.500" stroke-linecap="round"/><circle cx="16" cy="12" r="4.500" fill="#FFD27A"/></g><g class="stick r"><line x1="70" y1="42" x2="84" y2="12" stroke="#FFD27A" stroke-width="4.500" stroke-linecap="round"/><circle cx="84" cy="12" r="4.500" fill="#FFD27A"/></g></g></svg><span class="puff">♪</span></button><button type="button" class="chr" style="left:26%" aria-label="Keyboard, tap to play"><svg viewBox="0 0 100 110" style="animation-delay:-1.5s"><g class="br"><rect x="6" y="44" width="88" height="54" rx="8" fill="#12476B"/><g class="eyes"><circle cx="36" cy="56" r="5.500" fill="#fff"/><circle cx="64" cy="56" r="5.500" fill="#fff"/><circle cx="37" cy="57" r="2.600" fill="#0B1F3A"/><circle cx="65" cy="57" r="2.600" fill="#0B1F3A"/></g><path d="M44 60q6 5 12 0" stroke="#FFF3DC" stroke-width="2.500" fill="none" stroke-linecap="round"/><rect x="12" y="67" width="76" height="25" rx="3" fill="#FFF3DC"/><path d="M31 67v25M50 67v25M69 67v25" stroke="#C9A56A" stroke-width="1.500"/><g fill="#0B1F3A"><rect x="26" y="67" width="9" height="15"/><rect x="45" y="67" width="9" height="15"/><rect x="64" y="67" width="9" height="15"/></g><g fill="#1FC8C3"><rect class="key" x="12" y="67" width="19" height="25"/><rect class="key" x="31" y="67" width="19" height="25"/><rect class="key" x="50" y="67" width="19" height="25"/><rect class="key" x="69" y="67" width="19" height="25"/></g></g></svg><span class="puff">♫</span></button><button type="button" class="chr" style="left:51%" aria-label="Ukulele, tap to play"><svg viewBox="0 0 100 110" style="animation-delay:-2.5s"><g class="br"><rect x="44" y="10" width="12" height="42" fill="#E8C98F"/><rect x="41" y="3" width="18" height="14" rx="5" fill="#FF6F61"/><ellipse cx="50" cy="52" rx="19" ry="17" fill="#FFF3DC"/><ellipse cx="50" cy="76" rx="26" ry="24" fill="#FFF3DC"/><path d="M47 14V96M53 14V96" stroke="#1FC8C3" stroke-width="1.500"/><g class="eyes"><circle cx="41" cy="64" r="5.500" fill="#fff"/><circle cx="59" cy="64" r="5.500" fill="#fff"/><circle cx="42" cy="65" r="2.800" fill="#0B1F3A"/><circle cx="60" cy="65" r="2.800" fill="#0B1F3A"/></g><circle cx="50" cy="82" r="8" fill="#0B1F3A"/><ellipse cx="50" cy="85" rx="4" ry="3" fill="#FF6F61"/><g class="wavearm"><path d="M26 78C12 76 8 62 12 50" stroke="#FF6F61" stroke-width="6" fill="none" stroke-linecap="round"/></g></g></svg><span class="puff">♪</span></button><button type="button" class="chr" style="left:75%" aria-label="Saxophone, tap to play"><svg viewBox="0 0 100 110" style="animation-delay:-3.2s"><g class="br"><path d="M58 8L55 20L50 70Q48 98 66 96Q84 94 82 70" stroke="#FFD27A" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="83" cy="64" rx="11" ry="6.500" fill="#E9B85A"/><path d="M54 8h14" stroke="#FF6F61" stroke-width="5" stroke-linecap="round"/><g class="eyes"><circle cx="46" cy="44" r="4.800" fill="#fff"/><circle cx="58" cy="44" r="4.800" fill="#fff"/><circle cx="47" cy="45" r="2.300" fill="#0B1F3A"/><circle cx="59" cy="45" r="2.300" fill="#0B1F3A"/></g><path d="M47 55q5 5 10 0" stroke="#0B1F3A" stroke-width="2.500" fill="none" stroke-linecap="round"/><circle cx="60" cy="72" r="2.500" fill="#0B1F3A" opacity=".5"/><circle cx="60" cy="82" r="2.500" fill="#0B1F3A" opacity=".5"/></g></svg><span class="puff">♫</span></button>
+    </div>
+
+    <div class="efoot"><button type="button" class="cta" id="e1go">Let’s begin</button></div>
+  </section>
+  <section class="entr" data-e="e2" hidden>
+    <h1>Select your instrument</h1><p class="sub">Ukulele is ready now. More are on the way.</p>
+    <div class="tiles" id="tiles" role="radiogroup" aria-label="Instrument"><button type="button" class="tile play" role="radio" aria-checked="false" data-i="uke" data-n="Ukulele"><svg class="ico" aria-hidden="true"><use href="#i-uke"/></svg>Ukulele<small>Playable now</small></button><button type="button" class="tile" role="radio" aria-disabled="true" data-i="keys" data-n="Keyboard"><svg class="ico" aria-hidden="true"><use href="#i-keys"/></svg>Keyboard<small>Coming soon</small></button><button type="button" class="tile" role="radio" aria-disabled="true" data-i="guitar" data-n="Guitar"><svg class="ico" aria-hidden="true"><use href="#i-guitar"/></svg>Guitar<small>Coming soon</small></button><button type="button" class="tile" role="radio" aria-disabled="true" data-i="drum" data-n="Drums"><svg class="ico" aria-hidden="true"><use href="#i-drum"/></svg>Drums<small>Coming soon</small></button><button type="button" class="tile" role="radio" aria-disabled="true" data-i="sax" data-n="Saxophone"><svg class="ico" aria-hidden="true"><use href="#i-sax"/></svg>Saxophone<small>Coming soon</small></button><button type="button" class="tile" role="radio" aria-disabled="true" data-i="flute" data-n="Flute"><svg class="ico" aria-hidden="true"><use href="#i-flute"/></svg>Flute<small>Coming soon</small></button><button type="button" class="tile" role="radio" aria-disabled="true" data-i="harm" data-n="Harmonica"><svg class="ico" aria-hidden="true"><use href="#i-harm"/></svg>Harmonica<small>Coming soon</small></button><button type="button" class="tile" role="radio" aria-disabled="true" data-i="cello" data-n="Cello"><svg class="ico" aria-hidden="true"><use href="#i-cello"/></svg>Cello<small>Coming soon</small></button><button type="button" class="tile" role="radio" aria-disabled="true" data-i="violin" data-n="Violin"><svg class="ico" aria-hidden="true"><use href="#i-violin"/></svg>Violin<small>Coming soon</small></button><button type="button" class="tile" role="radio" aria-disabled="true" data-i="more" data-n="Explore more"><svg class="ico" aria-hidden="true"><use href="#i-more"/></svg>Explore more<small>Coming soon</small></button></div>
+    <p class="hint" id="ihint" role="status"></p>
+    <div class="efoot"><button type="button" class="ghost" id="e2back">Back</button><button type="button" class="cta" id="e2go" disabled>Continue</button></div>
+  </section>
+  <section class="entr" data-e="e4" hidden>
+    <h1>Choose your age group</h1><p class="sub">No birth date needed.</p>
+    <div class="opts" id="ages" role="radiogroup" aria-label="Age group">
+      <button type="button" class="opt" role="radio" aria-checked="false" data-age="u13"><span class="bd"></span><span class="txt"><b>Under 13</b><small>Playful look suggested</small></span></button>
+      <button type="button" class="opt" role="radio" aria-checked="false" data-age="t"><span class="bd"></span><span class="txt"><b>13–17</b><small>Playful look suggested</small></span></button>
+      <button type="button" class="opt" role="radio" aria-checked="false" data-age="a"><span class="bd"></span><span class="txt"><b>18+</b><small>Calm look suggested</small></span></button>
+    </div>
+    <p class="sub" id="sug" role="status">Pick an age group for a style suggestion.</p>
+    <div class="seg"><div class="mode" role="group" aria-label="Look and feel"><button type="button" data-mode="play" aria-pressed="true">Playful</button><button type="button" data-mode="calm" aria-pressed="false">Calm</button></div></div>
+    <p class="sub" style="font-size:14px">Switch any time with the switch at the top.</p>
+    <div class="efoot"><button type="button" class="ghost" id="e4back">Back</button><button type="button" class="cta" id="e4go" disabled>Continue</button></div>
+  </section>
+  <section class="entr" data-e="e5" hidden>
+    <h1>Choose your level</h1><p class="sub">Start where you are. You can grow from here.</p>
+    <div class="opts" id="levels" role="radiogroup" aria-label="Level">
+      <button type="button" class="opt" role="radio" aria-checked="false" data-lv="beginner"><span class="bd"></span><span class="txt"><b>Beginner</b><small>Playable now</small></span></button>
+      <button type="button" class="opt" role="radio" aria-disabled="true" data-lv="mid"><span class="bd"></span><span class="txt"><b>Intermediate</b><small>Coming soon</small></span></button>
+      <button type="button" class="opt" role="radio" aria-disabled="true" data-lv="adv"><span class="bd"></span><span class="txt"><b>Advanced</b><small>Coming soon</small></span></button>
+    </div>
+    <p class="hint" id="lhint" role="status"></p>
+    <div class="efoot"><button type="button" class="ghost" id="e5back">Back</button><button type="button" class="cta" id="e5go">Continue</button></div>
+  </section>
+  <section class="entr" data-e="e6" hidden>
+    <div class="scene story" id="scene6">
+      <div class="w-sea"></div><div class="w-sand"></div>
+      <svg viewBox="0 0 360 340" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"><path class="isl" d="M12 196C29 152 52 142 70 142C87 142 110 152 128 196Z"/><path class="glow g1" d="M12 196C29 152 52 142 70 142C87 142 110 152 128 196Z"/><path class="isl" d="M124 196C143 152 170 142 190 142C209 142 236 152 256 196Z"/><path class="glow g2" d="M124 196C143 152 170 142 190 142C209 142 236 152 256 196Z"/><path class="isl" d="M248 196C263 152 284 142 300 142C315 142 336 152 352 196Z"/><path class="glow g3" d="M248 196C263 152 284 142 300 142C315 142 336 152 352 196Z"/></svg>
+      <div class="notes" aria-hidden="true"><i style="left:8%;color:#FFD27A;animation-delay:0.0s;animation-duration:7s">♪</i><i style="left:22%;color:#1FC8C3;animation-delay:1.6s;animation-duration:8s">♫</i><i style="left:38%;color:#FF6F61;animation-delay:3.1s;animation-duration:7s">♪</i><i style="left:52%;color:#FFD27A;animation-delay:0.8s;animation-duration:9s">♫</i><i style="left:66%;color:#1FC8C3;animation-delay:2.4s;animation-duration:7s">♪</i><i style="left:80%;color:#FF6F61;animation-delay:4.2s;animation-duration:8s">♫</i><i style="left:92%;color:#FFD27A;animation-delay:5.4s;animation-duration:9s">♪</i><i style="left:30%;color:#FFF3DC;animation-delay:6.0s;animation-duration:8s">♪</i></div>
+      <div class="mclone" id="mclone"></div>
+    </div>
+    <div class="caps" id="caps"><p class="cap">The Silent Islands have lost their music.</p><p class="cap">One small sound can wake each island.</p><p class="cap" id="cap3">You and your companion can bring it back.</p></div>
+    <div class="efoot"><button type="button" class="ghost" id="e6back">Back</button><button type="button" class="cta" id="e6go">Begin Island One</button></div>
+  </section>
+  <section class="islandmap" id="islandmap">
+    <svg class="isl-palm" viewBox="0 0 120 150" aria-hidden="true"><path d="M40 150C48 110 52 80 62 40" stroke="#07142A" stroke-width="7" fill="none" stroke-linecap="round"/><g fill="#07142A"><path d="M62 40C40 22 18 28 4 44 28 36 46 38 62 40Z"/><path d="M62 40C46 14 24 10 10 14 34 18 50 28 62 40Z"/><path d="M62 40C70 14 92 6 112 14 90 16 74 28 62 40Z"/><path d="M62 40C84 26 104 32 118 50 94 40 78 40 62 40Z"/></g></svg>
+    <div class="stops" id="stops"></div>
+    <button type="button" class="replay" id="replay">Replay welcome</button>
+  </section>
   <section class="stage">
     <div class="sea" aria-hidden="true"></div>
     <svg class="palm" viewBox="0 0 120 150" aria-hidden="true">
@@ -121,7 +286,7 @@ h1{font:600 clamp(28px,8.6vw,36px)/1.05 var(--display);margin:0;text-wrap:balanc
     <div class="star" id="star" role="img" aria-label="Your first star">
       <svg viewBox="0 0 48 48"><path d="M24 4l6.2 12.9 14.1 1.9-10.3 9.8 2.6 14L24 35.7 11.4 42.6l2.6-14L3.7 18.8l14.1-1.9z"/></svg>
     </div>
-    <svg class="uku" id="uku" viewBox="0 0 260 340" role="img" aria-label="Uku, a singing ukulele mascot">
+    <svg class="uku" id="uku" viewBox="0 0 260 340" role="img" aria-label="Your ukulele companion">
       <defs><radialGradient id="bg" gradientUnits="userSpaceOnUse" cx="130" cy="200" r="130"><stop offset="0" stop-color="#FFF3DC"/><stop offset="1" stop-color="#F3D8A6"/></radialGradient></defs>
       <ellipse cx="130" cy="326" rx="64" ry="8" fill="#0B1F3A" opacity=".28"/>
       <g class="bob">
@@ -148,7 +313,10 @@ h1{font:600 clamp(28px,8.6vw,36px)/1.05 var(--display);margin:0;text-wrap:balanc
   </section>
 
   <footer class="sand">
-    <div data-f="home"><button type="button" class="cta" id="play">Let’s play</button></div>
+    <div data-f="map" hidden></div>
+    <div data-f="meet" hidden><button type="button" class="cta" id="nickSave">Save nickname</button><button type="button" class="ghost" style="width:100%;flex:none;margin-top:12px" id="meetBack">Back to map</button></div>
+    <div data-f="hold" hidden><button type="button" class="cta" id="holdDone">I’m comfortable</button><button type="button" class="ghost" style="width:100%;flex:none;margin-top:12px" data-back>Back to map</button></div>
+    <div data-f="home" hidden><button type="button" class="cta" id="play">Let’s play</button><button type="button" class="ghost" style="width:100%;flex:none;margin-top:12px" data-back>Back to map</button></div>
     <div data-f="guide" hidden>
       <button type="button" class="cta" id="mic">Enable microphone</button>
       <p class="note" id="gerr" hidden></p>
@@ -167,7 +335,7 @@ h1{font:600 clamp(28px,8.6vw,36px)/1.05 var(--display);margin:0;text-wrap:balanc
       <button type="button" class="cta" id="retry">Try again</button>
       <div class="row"><button type="button" class="ghost" id="demo2">Demo mode</button><button type="button" class="ghost" data-back>Back</button></div>
     </div>
-    <div data-f="won" hidden><button type="button" class="cta" id="again">Play again</button></div>
+    <div data-f="won" hidden><button type="button" class="cta" id="again">Back to map</button></div>
   </footer>
 </main>
 
@@ -212,7 +380,7 @@ function makeTracker(o){
   var $=function(i){return document.getElementById(i)},app=$('app'),star=$('star'),uku=$('uku');
   var NEED=3,TOL=25,count=0,view='home',demo=false,stream=null,ctx=null,raf=0,pitchy=null,loading=null;
   function show(v){
-    view=v;app.classList.toggle('chal',v==='guide'||v==='listen'||v==='denied');
+    view=v;app.classList.toggle('chal',v==='guide'||v==='listen'||v==='denied'||v==='meet'||v==='hold');app.classList.toggle('mapmode',v==='map');app.classList.toggle('nostar',v==='map'||v==='meet'||v==='hold');$('islandmap').hidden=v!=='map';app.classList.toggle('emode',/^e\d/.test(v));document.querySelectorAll('[data-e]').forEach(function(e){e.hidden=e.getAttribute('data-e')!==v});if(v!=='e6')stopStory();
     var f=(v==='listen'&&demo)?'demo':v;
     document.querySelectorAll('[data-v]').forEach(function(e){e.hidden=e.getAttribute('data-v')!==v});
     document.querySelectorAll('[data-f]').forEach(function(e){e.hidden=e.getAttribute('data-f')!==f});
@@ -230,7 +398,8 @@ function makeTracker(o){
     $('sub').textContent='Listening. '+count+' of '+NEED+' clear plucks.';
   }
   function reset(){count=0;$('fb').textContent='Pluck the open A string';$('needle').style.left='50%';star.classList.remove('awake');paint()}
-  function home(){stopMic();demo=false;reset();show('home')}
+  function intro(){stopMic();demo=false;reset();show('home')}
+  function toMap(msg){ent=false;stopMic();demo=false;reset();$('maphint').textContent=msg||'';renderMap();show('map')}
   function loadPitchy(){
     if(!loading)loading=import('./vendor/pitchy.js').then(function(m){pitchy=m;return m},function(e){loading=null;throw e});
     return loading;
@@ -241,7 +410,7 @@ function makeTracker(o){
     $('needle').style.left=(50+Math.max(-100,Math.min(100,cents))/2)+'%';
     if(Math.abs(cents)<=TOL){
       count++;paint();$('fb').textContent='you’ve got it';
-      if(count>=NEED){stopMic();show('won');star.classList.add('awake');uku.classList.remove('hop');void uku.getBoundingClientRect();uku.classList.add('hop')}
+      if(count>=NEED){stopMic();if(!demo)markDone(3);$('wt').textContent=demo?'Demo complete':'You woke the star!';$('wp').textContent=demo?'Practice only. Play with the microphone to complete this stop.':'Three clear plucks on the A string. Stop 3 is complete.';show('won');star.classList.add('awake');uku.classList.remove('hop');void uku.getBoundingClientRect();uku.classList.add('hop')}
     }else $('fb').textContent=cents>0?'a little lower':'a little higher';
   }
   function denied(msg){stopMic();$('dmsg').textContent=msg;show('denied')}
@@ -271,13 +440,112 @@ function makeTracker(o){
     }
   }
   $('play').onclick=guide;$('mic').onclick=enableMic;$('retry').onclick=enableMic;
-  $('demo').onclick=startDemo;$('demo2').onclick=startDemo;$('again').onclick=home;
-  document.querySelectorAll('[data-back]').forEach(function(e){e.onclick=home});
+  $('demo').onclick=startDemo;$('demo2').onclick=startDemo;$('again').onclick=function(){toMap()};
+  document.querySelectorAll('[data-back]').forEach(function(e){e.onclick=function(){toMap()}});
   document.querySelectorAll('[data-demo]').forEach(function(e){e.onclick=function(){if(view==='listen'&&demo)onResult(+e.getAttribute('data-demo'))}});
   function leave(){if(view==='listen'&&!demo){stopMic();show('guide')}}
   document.addEventListener('visibilitychange',function(){if(document.hidden)leave()});
   window.addEventListener('pagehide',leave);
-  show('home');
+  var KEY='ukx.island1',st={name:'',done:[]};
+  try{var r=JSON.parse(localStorage.getItem(KEY)||'null');if(r&&typeof r==='object'){st.name=String(r.name||'').slice(0,16);st.done=(Array.isArray(r.done)?r.done:[]).filter(function(n){return n===1||n===2||n===3})}}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+  function has(n){return st.done.indexOf(n)>-1}
+  function markDone(n){if(!has(n)){st.done.push(n);save()}}
+  var STOPS=[{t:'Meet your companion',s:'Choose a nickname'},{t:'Get comfortable',s:'Short holding guide · awaiting teacher review'},{t:'Singing Stars',s:'Wake a star with the A string'},{t:'Find the beat',s:'Coming soon'},{t:'Beach concert',s:'Coming soon'}];
+  function sstate(n){if(n>3)return 'soon';if(has(n))return 'done';return(n===1||has(n-1))?'open':'locked'}
+  function hint(t){$('maphint').textContent=t}
+  function renderMap(){
+    var box=$('stops');box.textContent='';
+    STOPS.forEach(function(x,i){
+      var n=i+1,s=sstate(n),b=document.createElement('button');
+      b.type='button';b.className='stop '+s;b.setAttribute('data-n',n);
+      if(s==='locked'||s==='soon')b.setAttribute('aria-disabled','true');
+      var bd=document.createElement('span');bd.className='bd';
+      if(s==='done')bd.textContent='✓';else if(s==='open')bd.textContent=n;else bd.innerHTML='<svg class="ic" aria-hidden="true"><use href="#lock"/></svg>';
+      var tx=document.createElement('span');tx.className='txt';
+      var t=document.createElement('b');t.textContent=x.t;
+      var m=document.createElement('small');
+      m.textContent=s==='done'?'Done. Tap to revisit.':s==='locked'?'Finish stop '+(n-1)+' first':(n===4&&has(3)?'Next up · coming soon':x.s);
+      tx.appendChild(t);tx.appendChild(m);b.appendChild(bd);b.appendChild(tx);box.appendChild(b);
+    });
+    var k=st.done.length;$('mapsub').textContent=(st.name?st.name+' is with you. ':'')+k+' of 3 stops done.';
+    if(st.name)uku.setAttribute('aria-label',st.name+', your ukulele companion');
+  }
+  $('stops').onclick=function(e){
+    var b=e.target.closest('.stop');if(!b)return;
+    var n=+b.getAttribute('data-n'),s=sstate(n);
+    if(s==='locked'){hint('Finish “'+STOPS[n-2].t+'” first.');return}
+    if(s==='soon'){hint('“'+STOPS[n-1].t+'” is coming soon.');return}
+    if(n===1){$('nick').value=st.name;$('nickerr').hidden=true;show('meet')}else if(n===2)show('hold');else intro();
+  };
+  function saveNick(){
+    var v=$('nick').value.replace(/\s+/g,' ').trim().slice(0,16);
+    if(!v){$('nickerr').hidden=false;$('nick').focus();return}
+    st.name=v;markDone(1);save();if(ent)goStep(4);else toMap('Nice to meet you, '+v+'!');
+  }
+  $('nickSave').onclick=saveNick;
+  $('nick').onkeydown=function(e){if(e.key==='Enter')saveNick()};
+  $('holdDone').onclick=function(){markDone(2);toMap('Great. Next up: Singing Stars.')};
+  /* ---- entrance flow ---- */
+  var SKEY='ukx.setup',su={step:1,instrument:'',age:'',mode:'play',level:'',done:false},ent=false;
+  try{var q=JSON.parse(localStorage.getItem(SKEY)||'null');if(q&&typeof q==='object'){su.step=Math.min(6,Math.max(1,+q.step||1));su.instrument=q.instrument==='ukulele'?'ukulele':'';su.age=['u13','t','a'].indexOf(q.age)>-1?q.age:'';su.mode=q.mode==='calm'?'calm':'play';su.level=q.level==='beginner'?'beginner':'';su.done=q.done===true}}catch(e){}
+  function saveSu(){try{localStorage.setItem(SKEY,JSON.stringify(su))}catch(e){}}
+  var VIEWS=['','e1','e2','meet','e4','e5','e6'],RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function setMode(calm){
+    app.classList.toggle('calm',calm);su.mode=calm?'calm':'play';saveSu();
+    document.querySelectorAll('.mode button').forEach(function(b){b.setAttribute('aria-pressed',(b.getAttribute('data-mode')==='calm')===calm)});
+  }
+  document.querySelectorAll('.mode button').forEach(function(b){b.onclick=function(){setMode(b.getAttribute('data-mode')==='calm')}});
+  function chk(sel,attr,val){document.querySelectorAll(sel).forEach(function(e){var on=e.getAttribute(attr)===val;e.setAttribute('aria-checked',on);var bd=e.querySelector('.bd');if(bd)bd.textContent=on?'✓':''})}
+  var storyT=0,capI=0;
+  function caps(){var c=document.querySelectorAll('#caps .cap');for(var i=0;i<c.length;i++)c[i].classList.toggle('on',RM||i===capI)}
+  function stopStory(){clearInterval(storyT);storyT=0}
+  function startStory(){
+    stopStory();var box=$('mclone');
+    if(!box.firstChild){
+      var m=uku.cloneNode(true);m.removeAttribute('id');m.removeAttribute('role');m.setAttribute('aria-hidden','true');m.classList.remove('hop');
+      var g=m.querySelector('radialGradient');if(g)g.id='bg2';
+      m.querySelectorAll('[fill="url(#bg)"]').forEach(function(e){e.setAttribute('fill','url(#bg2)')});
+      box.appendChild(m);
+    }
+    $('cap3').textContent=(st.name?st.name+' and you':'You and your companion')+' can bring it back.';
+    $('caps').classList.toggle('rm',RM);capI=0;caps();
+    if(!RM)storyT=setInterval(function(){capI=(capI+1)%3;caps()},3400);
+  }
+  function prep(n){
+    if(n===2){chk('#tiles .tile.play','data-i','')||0;document.querySelector('#tiles .play').setAttribute('aria-checked',su.instrument==='ukulele');$('e2go').disabled=!su.instrument;$('ihint').textContent=''}
+    if(n===3){$('nick').value=st.name;$('nickerr').hidden=true;$('meetBack').textContent='Back'}
+    if(n===4){chk('#ages .opt','data-age',su.age);$('e4go').disabled=!su.age;setMode(su.mode==='calm');$('sug').textContent=su.age?(su.age==='a'?'We suggest the Calm look for you.':'We suggest the Playful look for you.'):'Pick an age group for a style suggestion.'}
+    if(n===5){su.level=su.level||'beginner';chk('#levels .opt[data-lv=beginner]','data-lv',su.level);$('lhint').textContent=''}
+    if(n===6)startStory();
+  }
+  function goStep(n){ent=true;su.step=n;saveSu();prep(n);show(VIEWS[n]);window.scrollTo(0,0)}
+  $('scene1').onclick=function(e){var b=e.target.closest('.chr');if(!b)return;b.classList.remove('tap');void b.offsetWidth;b.classList.add('tap');clearTimeout(b._t);b._t=setTimeout(function(){b.classList.remove('tap')},900)};
+  $('tiles').onclick=function(e){
+    var b=e.target.closest('.tile');if(!b)return;
+    if(b.getAttribute('aria-disabled')){$('ihint').textContent=b.getAttribute('data-n')+' is coming soon.';return}
+    su.instrument='ukulele';saveSu();b.setAttribute('aria-checked','true');$('e2go').disabled=false;$('ihint').textContent='';
+  };
+  $('ages').onclick=function(e){
+    var b=e.target.closest('.opt');if(!b)return;su.age=b.getAttribute('data-age');saveSu();
+    chk('#ages .opt','data-age',su.age);$('e4go').disabled=false;
+    $('sug').textContent=su.age==='a'?'We suggest the Calm look for you.':'We suggest the Playful look for you.';setMode(su.age==='a');
+  };
+  $('levels').onclick=function(e){
+    var b=e.target.closest('.opt');if(!b)return;
+    if(b.getAttribute('aria-disabled')){$('lhint').textContent=b.querySelector('b').textContent+' is coming soon.';return}
+    su.level='beginner';saveSu();$('lhint').textContent='';
+  };
+  $('e1go').onclick=function(){goStep(2)};
+  $('e2back').onclick=function(){goStep(1)};$('e2go').onclick=function(){goStep(3)};
+  $('meetBack').onclick=function(){if(ent)goStep(2);else toMap()};
+  $('e4back').onclick=function(){goStep(3)};$('e4go').onclick=function(){goStep(5)};
+  $('e5back').onclick=function(){goStep(4)};$('e5go').onclick=function(){su.level='beginner';goStep(6)};
+  $('e6back').onclick=function(){goStep(5)};
+  $('e6go').onclick=function(){su.done=true;saveSu();toMap('Welcome to Island One!')};
+  $('replay').onclick=function(){su.done=false;goStep(1)};
+  setMode(su.mode==='calm');
+  if(su.done){renderMap();show('map')}else goStep(su.step);
 })();
 </script>
 </body></html>
